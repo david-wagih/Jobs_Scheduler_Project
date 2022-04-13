@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobsScheduler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Home" Height="450" Width="800">
     <Grid>
+        <TextBlock
+            Margin="5"
+            FontWeight="Bold"
+            FontSize="20"
+            TextAlignment="Center"
+            >Job Schedulers App</TextBlock>
+        <TextBlock
+            FontSize="15"
+            TextDecorations="Underline"
+            Margin="35"
+            >Choose your prefered Scheduler:</TextBlock>
+        <StackPanel Margin="65">
+            <ComboBox
+                x:Name="Combo_Value"
+                HorizontalAlignment="Left"
+                Width="200"
+                >
+                <ComboBoxItem >FCFS</ComboBoxItem>
+                <ComboBoxItem >SJF Preemptive</ComboBoxItem>
+                <ComboBoxItem>SJF Non-Preemptive</ComboBoxItem>
+                <ComboBoxItem>Priority Preemptive</ComboBoxItem>
+                <ComboBoxItem>Priority Non-Preemptive</ComboBoxItem>
+                <ComboBoxItem>Round Robin</ComboBoxItem>
+            </ComboBox>
+            <TextBlock
+                TextDecorations="Underline"
+                Margin="50"
+                FontSize="15"
+                >Please Enter number of Processes from one to five:</TextBlock>
+            <TextBox
+                Text="1"
+                x:Name="ProcessesNo_Input"
+                PreviewTextInput="ProcessesNo_Input_PreviewTextInput"
+                InputScope="Number"
+                Width="50"
+                Height="30"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Margin="5"
+                
+                ></TextBox>
+            <TextBlock
+                Visibility="Visible"
+                TextAlignment="Center"
+                x:Name="errorMessage"
+                FontStyle="Italic"
+                Width="250"
+                Height="20"
+                Foreground="Red"
+                ></TextBlock>
+            <Button
+                Click="Next_Button_Click"
+                Cursor="Hand"
+                Padding="3"
+                BorderThickness="1.5"
+                FontSize="15"
+                Height="30"
+                Margin="20"
+                Width="150"
+                >Next</Button>
+            
+        </StackPanel>
 
-    </Grid>
+    </Grid> 
 </Window>
