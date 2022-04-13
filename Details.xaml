@@ -6,41 +6,28 @@
         xmlns:local="clr-namespace:JobsScheduler"
         mc:Ignorable="d"
         Title="Details" Height="500" Width="1000">
-    <Grid x:Name="ourGrid"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top"
-          
-          >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
-        </Grid.ColumnDefinitions>
+    <Grid>
+        <DataGrid
+            Height="380" 
+            Width="800"
+            Name="ourGrid"
+            RowHeight="60"
+            ColumnWidth="160"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            CanUserAddRows="True"
+            Margin="0,23,0,0"
+            Padding="5"
+            >
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="80"/>
-            <RowDefinition  Height="80"/>
-            <RowDefinition  Height="80"/>
-            <RowDefinition  Height="80"/>
-            <RowDefinition  Height="60" />
-        </Grid.RowDefinitions>
-
-        <TextBlock  Grid.Column="0" HorizontalAlignment="Center">Process No</TextBlock>
-        <TextBlock  Grid.Column="1" HorizontalAlignment="Center">Arrival Time</TextBlock>
-        <TextBlock  Grid.Column="2" HorizontalAlignment="Center">Burst Time</TextBlock>
-        <TextBlock  Grid.Column="3" HorizontalAlignment="Center">Priority</TextBlock>
-        <TextBlock  Grid.Column="4" HorizontalAlignment="Center">Quantum Time</TextBlock>
+        </DataGrid>
         <Button 
-                Margin="8"
-                Grid.Column="2"
-                Grid.Row="5"
+                Click="GetChart_Click"
+                Margin="0,420,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Width="100"
-                Height="100"
+                VerticalAlignment="Top"
+                Width="60"
+                Height="36"
                 BorderThickness="2"
                 Cursor="Hand"
                 >

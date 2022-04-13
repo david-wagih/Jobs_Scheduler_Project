@@ -19,108 +19,43 @@ namespace JobsScheduler
     /// </summary>
     public partial class Details : Window
     {
+        public List<Process> myProcesses = new();
+        public int processesNumber;
+        public string schedulerType;
 
-        public Details(int Number , string type)
+
+        public Details(int Number, string type)
         {
+            processesNumber = Number;
+            schedulerType = type;
             InitializeComponent();
             try
             {
-                RenderRows(Number, type);
+                ourGrid.ItemsSource = new List<Process>();
 
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        public void RenderRows(int number, string type)
+        public void GetChart_Click(object sender, RoutedEventArgs e)
         {
-            for(int i = 0; i < number; i++)
+            foreach (var process in ourGrid.Items.OfType<Process>())
             {
-                if (type == "FCFS" || type == "SJF Preemptive" || type == "SJF Non-Preemptive")
+                myProcesses.Add(new Process()
                 {
-                    for (int j = 0; j < ourGrid.ColumnDefinitions.Count-2; j++)
-                    {
-
-
-                        Border panel = new Border();
-                        Grid.SetColumn(panel, j);
-                        Grid.SetRow(panel, i);
-                        // Text Box Properties
-                        TextBox textBox = new TextBox();
-                        if(j == 0)
-                        {
-                            textBox.Text = "P" + i;
-                            textBox.IsReadOnly = true;
-                        }
-                        textBox.Width = 100;
-                        textBox.TextAlignment = TextAlignment.Center;
-                        textBox.HorizontalAlignment = HorizontalAlignment.Center;
-                        textBox.VerticalAlignment = VerticalAlignment.Center;
-                        panel.Child = textBox;
-                        ourGrid.Children.Add(panel);
-
-                    }
-                }
-                else if( type == "Priority Preemptive" || type == "Priority Non-Preemptive")
-                {
-                    for (int j = 0; j < ourGrid.ColumnDefinitions.Count-1; j++)
-                    {
-
-                        Border panel = new Border();
-                        Grid.SetColumn(panel, j);
-                        Grid.SetRow(panel, i);
-                        // Text Box Properties
-                        TextBox textBox = new TextBox();
-                        if (j == 0)
-                        {
-                            textBox.Text = "P" + i;
-                            textBox.IsReadOnly = true;
-                        }
-                        textBox.Width = 100;
-                        textBox.TextAlignment = TextAlignment.Center;
-                        textBox.HorizontalAlignment = HorizontalAlignment.Center;
-                        textBox.VerticalAlignment = VerticalAlignment.Center;
-                        panel.Child = textBox;
-                        ourGrid.Children.Add(panel);
-
-                    }
-
-                }
-                else
-                // this is the case for Round Robin
-                {
-                    for (int j = 0; j < ourGrid.ColumnDefinitions.Count; j++)
-                    {
-                        if(j == 3)
-                        {
-                            continue;
-                        }
-                        Border panel = new Border();
-                        Grid.SetColumn(panel, j);
-                        Grid.SetRow(panel, i);
-                        // Text Box Properties
-                        TextBox textBox = new TextBox();
-                        if (j == 0)
-                        {
-                            textBox.Text = "P" + i;
-                            textBox.IsReadOnly = true;
-                        }
-                        textBox.Width = 100;
-                        textBox.TextAlignment = TextAlignment.Center;
-                        textBox.HorizontalAlignment = HorizontalAlignment.Center;
-                        textBox.VerticalAlignment = VerticalAlignment.Center;
-                        panel.Child = textBox;
-                        ourGrid.Children.Add(panel);
-
-                    }
-
-                }
-
+                    processNumber = process.processNumber,
+                    arrivalTime = process.arrivalTime,
+                    burstTime = process.burstTime,
+                    priority = process.priority,
+                    quantumTime = process.quantumTime,
+                });
             }
-
+            Console.WriteLine(myProcesses.Count);
         }
-
- 
     }
 }
+
