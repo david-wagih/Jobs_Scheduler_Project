@@ -1,16 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-static class FCFS_Scheduler {
-    static int[] FCFS_Scheduler_Handler(int[] arrival_time, int[] burst_time) {
-        SortedDictionary<int, int> Processes = new SortedDictionary<int, int>();
-        for (int i = 0; i < arrival_time.Length; i++)
-            Processes[arrival_time[i]] = burst_time[i];
+public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
+{
+    int IComparable<ProcessWrapper>.CompareTo(ProcessWrapper other)
+    {
+        if (this.arrivalTime >= other.arrivalTime) return -1;
+        else return 1;
+    }
+}
 
-        int c = 0;
-        int[] result = new int[arrival_time.Length];
-        foreach (var process in Processes)
-            result[c++] = process.Value;
+public class FCFS_Scheduler
+{
 
-        return result;
+    List<ProcessWrapper> OrderOfExecution;
+    float averageWaitingTime;
+
+    FCFS_Scheduler(List<JobsScheduler.Process> processes)
+    {
+        OrderOfExecution = new List<ProcessWrapper>();
+        foreach (var process in processes)
+        {
+            OrderOfExecution.Add((ProcessWrapper)process);
+        }
+
+        OrderOfExecution.Sort();
+
+        averageWaitingTime = 0;
+        float acc = 0;
+        foreach (var process in OrderOfExecution)
+        {
+            acc += process.burstTime;
+            averageWaitingTime += acc;
+        }
+        averageWaitingTime -= acc;
+        averageWaitingTime = (float)averageWaitingTime / OrderOfExecution.Count;
     }
 }
