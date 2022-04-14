@@ -8,19 +8,19 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\dodom\\.nuget\\packages\\": {}
+    "C:\\Users\\Mark George\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj",
+      "projectUniqueName": "C:\\Users\\Mark George\\Desktop\\Scheduler\\Jobs_Scheduler_Project\\JobsScheduler.csproj",
       "projectName": "JobsScheduler",
-      "projectPath": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj",
-      "packagesPath": "C:\\Users\\dodom\\.nuget\\packages\\",
-      "outputPath": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\obj\\",
+      "projectPath": "C:\\Users\\Mark George\\Desktop\\Scheduler\\Jobs_Scheduler_Project\\JobsScheduler.csproj",
+      "packagesPath": "C:\\Users\\Mark George\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mark George\\Desktop\\Scheduler\\Jobs_Scheduler_Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dodom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mark George\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
