@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace JobsScheduler
 {
+
     /// <summary>
     /// Interaction logic for Details.xaml
     /// </summary>
@@ -54,7 +56,10 @@ namespace JobsScheduler
                     quantumTime = process.quantumTime,
                 });
             }
-            Console.WriteLine(myProcesses.Count);
+
+            // here we need to write the Drawing logic for the Gantt Chart
+            var newForm = new Chart(myProcesses);
+            newForm.Show();
         }
     }
 }

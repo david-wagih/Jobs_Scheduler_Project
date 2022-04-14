@@ -9,15 +9,14 @@
     <Grid>
         <DataGrid
             Height="380" 
-            Width="800"
+            Width="1000"
             Name="ourGrid"
             RowHeight="60"
-            ColumnWidth="160"
-            HorizontalAlignment="Center"
+            ColumnWidth="200"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             CanUserAddRows="True"
-            Margin="0,23,0,0"
-            Padding="5"
+            HorizontalScrollBarVisibility="Hidden"
             >
 
         </DataGrid>
