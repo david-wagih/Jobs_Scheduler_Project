@@ -55,6 +55,24 @@ namespace JobsScheduler
                     priority = process.priority,
                     quantumTime = process.quantumTime,
                 });
+                // here myProcesses variable contains the User Input data for each Process and this list should be used in each algo according to Scheduler type
+                if(schedulerType == "FCFS")
+                {
+
+                }else if(schedulerType == "SJF Preemptive"){
+
+                }else if(schedulerType == "SJF Non-Preemptive")
+                {
+
+                }else if (schedulerType == "Priority Non-Preemptive") { 
+                }
+                else if (schedulerType == "Priority Preemptive")
+                {
+                }
+                else
+                {
+                    // Round Robin Case
+                }
             }
 
             // here we need to write the Drawing logic for the Gantt Chart
