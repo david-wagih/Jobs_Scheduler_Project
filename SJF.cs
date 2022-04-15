@@ -9,25 +9,26 @@ using System.Threading.Tasks;
 
 namespace JobsScheduler
 {
-    public class Process
-    {
-        public int id;
-        public int arrivalT;
-        public int burstT;
-        
 
-        public Process(int id, int arrivalT, int burstT)
+    class SJF
+
+    {
+        public class Process
         {
-            this.id = id;
-            this.arrivalT = arrivalT;
-            this.burstT = burstT;
+            public int id;
+            public int arrivalT;
+            public int burstT;
+
+
+            public Process(int id, int arrivalT, int burstT)
+            {
+                this.id = id;
+                this.arrivalT = arrivalT;
+                this.burstT = burstT;
+            }
+
         }
 
-    }
-
-    class Class1
-
-    {
         public static void Arrival_sort(Process[] processes)
         {
             Process[] temp = new Process[1];
