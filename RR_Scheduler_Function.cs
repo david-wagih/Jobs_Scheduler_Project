@@ -36,7 +36,6 @@ public class RR_Scheduler_Function
                             flag = false;
                             if (tmp_burst[i] > quantum)
                             {
-
                                 clk += quantum;
                                 res[it++] = new Tuple<int, int>(i + 1, quantum);
                                 tmp_burst[i] -= quantum;
@@ -44,11 +43,8 @@ public class RR_Scheduler_Function
                             }
                             else
                             {
-
                                 clk += tmp_burst[i];
-
                                 wait[i] = clk - burst[i] - arrival[i];
-
                                 res[it++] = new Tuple<int, int>(i + 1, tmp_burst[i]);
                                 tmp_burst[i] = 0;
                             }
