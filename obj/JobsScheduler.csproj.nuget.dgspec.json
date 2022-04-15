@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj": {}
+    "C:\\Users\\farah\\source\\repos\\Jobs_Scheduler_Project\\JobsScheduler.csproj": {}
   },
   "projects": {
-    "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj": {
+    "C:\\Users\\farah\\source\\repos\\Jobs_Scheduler_Project\\JobsScheduler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj",
+        "projectUniqueName": "C:\\Users\\farah\\source\\repos\\Jobs_Scheduler_Project\\JobsScheduler.csproj",
         "projectName": "JobsScheduler",
-        "projectPath": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\JobsScheduler.csproj",
-        "packagesPath": "C:\\Users\\dodom\\.nuget\\packages\\",
-        "outputPath": "D:\\Faculty_Stuff\\Spring_2022\\OperatingSystems\\Project\\JobsScheduler\\obj\\",
+        "projectPath": "C:\\Users\\farah\\source\\repos\\Jobs_Scheduler_Project\\JobsScheduler.csproj",
+        "packagesPath": "C:\\Users\\farah\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\farah\\source\\repos\\Jobs_Scheduler_Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dodom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\farah\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
