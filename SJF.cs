@@ -13,31 +13,15 @@ namespace JobsScheduler
     class SJF
 
     {
-        public class Process
-        {
-            public int id;
-            public int arrivalT;
-            public int burstT;
-
-
-            public Process(int id, int arrivalT, int burstT)
-            {
-                this.id = id;
-                this.arrivalT = arrivalT;
-                this.burstT = burstT;
-            }
-
-        }
-
-        public static void Arrival_sort(Process[] processes)
+        public static void Arrival_sort(List<Process> processes)
         {
             Process[] temp = new Process[1];
 
-            for (int i = 0; i < processes.Length; i++)
+            for (int i = 0; i < processes.Count; i++)
             {
-                for (int n = i + 1; n < processes.Length - 1; n++)
+                for (int n = i + 1; n < processes.Count - 1; n++)
                 {
-                    if (processes[n].arrivalT < processes[i].arrivalT)
+                    if (processes[n].arrivalTime < processes[i].arrivalTime)
                     {
                         temp[0] = processes[i];
                         processes[i] = processes[n];
@@ -48,14 +32,13 @@ namespace JobsScheduler
         }
 
 
-        public static Tuple<int, int>[] SJF_P(int[] AT, int[] BT, int p_num, ref float avg_waiting)
+        public static Tuple<int, int>[] SJF_P(List<Process> processes,ref float avg_waiting)
         {
             Tuple<int, int>[] sched_Processes = new Tuple<int, int>[100];
-            Process[] processes = new Process[p_num];
             Tuple<int, int> wait;
             int[] start_time = new int[40];
-            int[] remainingT = new int[p_num];
-            int[] waiting_time = new int[p_num];
+            int[] remainingT = new int[processes.Count];
+            int[] waiting_time = new int[processes.Count];
             int counter = 0;
             int time = 0;
             int shortest_index = 0, finish_time;
@@ -66,24 +49,24 @@ namespace JobsScheduler
             bool enter_flag = false;
 
             //set array values to class attributes
-            for (int i = 0; i < p_num; i++)
+            /*for (int i = 0; i < p_num; i++)
             {
                 processes[i] = new Process(i + 1, AT[i], BT[i]);
-            }
+            }*/
 
             Arrival_sort(processes);
 
-            for (int i = 0; i < p_num; i++)
-                remainingT[i] = processes[i].burstT;
+            for (int i = 0; i < processes.Count; i++)
+                remainingT[i] = processes[i].burstTime;
 
 
-            while (counter < p_num)
+            while (counter < processes.Count)
             {
 
                 enter_flag = false;
-                for (int i = 0; i < p_num; i++)
+                for (int i = 0; i < processes.Count; i++)
                 {
-                    if ((processes[i].arrivalT <= time) && (remainingT[i] < min) && (remainingT[i] > 0))
+                    if ((processes[i].arrivalTime <= time) && (remainingT[i] < min) && (remainingT[i] > 0))
                     {
                         shortest_index = i;
                         min = remainingT[i];
@@ -104,7 +87,7 @@ namespace JobsScheduler
 
                 if (enter_flag)
                 {
-                    wait = new Tuple<int, int>(processes[shortest_index].id, 0);
+                    wait = new Tuple<int, int>(processes[shortest_index].processNumber, 0);
                     sched_Processes[it++] = wait;
                 }
 
@@ -126,8 +109,8 @@ namespace JobsScheduler
 
 
                     waiting_time[shortest_index] = finish_time -
-                                processes[shortest_index].arrivalT -
-                                processes[shortest_index].burstT;
+                                processes[shortest_index].arrivalTime -
+                                processes[shortest_index].burstTime;
 
                     if (waiting_time[shortest_index] < 0)
                         waiting_time[shortest_index] = 0;
@@ -147,12 +130,12 @@ namespace JobsScheduler
 
             }
 
-            for (int i = 0; i < p_num; i++)
+            for (int i = 0; i < processes.Count; i++)
             {
                 avg_waiting = avg_waiting + waiting_time[i];
             }
 
-            avg_waiting = avg_waiting / p_num;
+            avg_waiting = avg_waiting / processes.Count;
 
             return sched_Processes;
         }
