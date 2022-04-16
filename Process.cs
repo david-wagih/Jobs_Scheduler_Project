@@ -9,9 +9,10 @@ namespace JobsScheduler
     public class Process
     {
         public string processNumber { get; set; }
-        public Int32 arrivalTime { get; set; }
-        public Int32 burstTime { get; set; }
-        public Int32? priority { get; set; }
-        public Int32? quantumTime { get; set; }
+        public float arrivalTime { get; set; }
+        public float burstTime { get; set; }
+        public float? priority { get; set; }
+        public float? quantumTime { get; set; }
+        public float? usingTime { get; set; }
     }
 }
