@@ -19,12 +19,12 @@ public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
 public class FCFS_Scheduler
 {
 
-    public List<ProcessWrapper> OrderOfExecution;
+    public List<JobsScheduler.Process> OrderOfExecution;
     public float averageWaitingTime;
 
     public FCFS_Scheduler(List<JobsScheduler.Process> processes)
     {
-        OrderOfExecution = new List<ProcessWrapper>();
+        OrderOfExecution = new List<JobsScheduler.Process>();
         foreach (var process in processes)
         {
             ProcessWrapper pw = new ProcessWrapper(process);
