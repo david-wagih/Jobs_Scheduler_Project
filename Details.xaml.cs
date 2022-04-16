@@ -25,14 +25,15 @@ namespace JobsScheduler
         public List<outputProcesses > outputProcesses = new(); // this list is for the output to be drawn on the chart
         public int processesNumber;
         public string schedulerType;
-        public int quantumValue;
+        public int? quantumValue;
+        public float avgWait;
 
 
         public Details(int Number, string type , int? quantumTime)
         {
             processesNumber = Number;
             schedulerType = type;
-            quantumValue = (int)quantumTime;
+            quantumValue = quantumTime;
             InitializeComponent();
             try
             {
@@ -60,6 +61,9 @@ namespace JobsScheduler
                 // here myProcesses variable contains the User Input data for each Process and this list should be used in each algo according to Scheduler type
                 if(schedulerType == "FCFS")
                 {
+                    FCFS_Scheduler s1 = new FCFS_Scheduler(myProcesses);
+                    outputProcesses = s1.outputList;
+                    avgWait = s1.averageWaitingTime;
 
 
                 }else if(schedulerType == "SJF Preemptive"){
@@ -79,7 +83,7 @@ namespace JobsScheduler
             }
 
             // here we need to write the Drawing logic for the Gantt Chart
-            var newForm = new Chart(outputProcesses);
+            var newForm = new Chart(outputProcesses , avgWait);
             newForm.Show();
         }
     }

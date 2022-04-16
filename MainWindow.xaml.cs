@@ -23,7 +23,7 @@ namespace JobsScheduler
     {
         public int noOfProcesses = 0;
         public string schedulerType = null;
-        public int quantumTime;
+        public int? quantumTime;
         public MainWindow()
         {
 

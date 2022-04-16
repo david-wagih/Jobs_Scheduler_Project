@@ -20,14 +20,14 @@ namespace JobsScheduler
     public partial class Chart : Window
     {
         public List<Rectangle> rectList = new List<Rectangle>();
-        public Chart(List<outputProcesses> ourProcesses)
+        public Chart(List<outputProcesses> ourProcesses , float averageWaitingTime)
         {
             InitializeComponent();
-            CreateChart(ourProcesses);
+            CreateChart(ourProcesses , averageWaitingTime);
 
         }
 
-        public void CreateChart(List<outputProcesses> listOfProcesses)
+        public void CreateChart(List<outputProcesses> listOfProcesses , float averageWait)
         {
             double ctr =0;
             
@@ -59,18 +59,28 @@ namespace JobsScheduler
                 usingTime.HorizontalAlignment = HorizontalAlignment.Center;
                 usingTime.VerticalAlignment = VerticalAlignment.Center;
                 usingTime.FontSize = 15;
-                usingTime.Text = (process.usingTime).ToString();
+                usingTime.Text = process.usingTime.ToString();
+
+                TextBlock averageWaitingTimeBlock = new();
+                averageWaitingTimeBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                averageWaitingTimeBlock.VerticalAlignment = VerticalAlignment.Center;
+                averageWaitingTimeBlock.FontSize = 15;
+                averageWaitingTimeBlock.Text = "Average Waiting time is: " + averageWait.ToString();
 
                 stackPanel.Children.Add(usingTime);
                 stackPanel.Children.Add(rectangle);
                 stackPanel.Children.Add(startTime);
                 stackPanel.Children.Add(ProcessName);
                 chartGrid.Children.Add(stackPanel);
+                chartGrid.Children.Add(averageWaitingTimeBlock);
+                Canvas.SetTop(averageWaitingTimeBlock, 300);
+                Canvas.SetLeft(averageWaitingTimeBlock, 10);
+
                 Canvas.SetTop(stackPanel, 100);
 
                 if (i == 0)
                 {
-                    Canvas.SetLeft(stackPanel, 0);
+                    Canvas.SetLeft(stackPanel, 10);
 
                 }
                 else
