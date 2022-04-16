@@ -5,8 +5,89 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobsScheduler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Home" Height="500" Width="1000">
     <Grid>
+        <TextBlock
+            Margin="5"
+            FontWeight="Bold"
+            FontSize="20"
+            TextAlignment="Center"
+            >Job Schedulers App</TextBlock>
+        <TextBlock
+            FontSize="15"
+            TextDecorations="Underline"
+            Margin="35,35,35,117"
+            >Choose your prefered Scheduler:</TextBlock>
+        <StackPanel Margin="51,64,135,101" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.109"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <ComboBox
+                SelectionChanged="ComboBox_SelectionChanged"
+                x:Name="Combo_Value"
+                HorizontalAlignment="Left"
+                Width="200"
+                >
+                <ComboBoxItem >FCFS</ComboBoxItem>
+                <ComboBoxItem >SJF Preemptive</ComboBoxItem>
+                <ComboBoxItem>SJF Non-Preemptive</ComboBoxItem>
+                <ComboBoxItem>Priority Preemptive</ComboBoxItem>
+                <ComboBoxItem>Priority Non-Preemptive</ComboBoxItem>
+                <ComboBoxItem>Round Robin</ComboBoxItem>
+            </ComboBox>
+            <TextBlock
+                TextDecorations="Underline"
+                Margin="50"
+                FontSize="15"
+                >Please Enter number of Processes from one to five:</TextBlock>
+            <TextBox
+                Text="1"
+                x:Name="ProcessesNo_Input"
+                PreviewTextInput="ProcessesNo_Input_PreviewTextInput"
+                InputScope="Number"
+                Width="50"
+                Height="30"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                
+                />
+            <TextBlock
+                Visibility="Visible"
+                TextAlignment="Center"
+                x:Name="errorMessage"
+                FontStyle="Italic"
+                Width="250"
+                Height="20"
+                Foreground="Red"
+                ></TextBlock>
+            <Button
+                Click="Next_Button_Click"
+                Cursor="Hand"
+                Padding="3"
+                BorderThickness="1.5"
+                FontSize="15"
+                Height="30"
+                Width="150"
+                Content="Next"
+                />
 
+
+        </StackPanel>
+        <TextBlock
+            Visibility="Hidden"
+            x:Name="quantumBlock"
+                TextAlignment="Center"
+                Margin="98,338,597,78"
+                TextDecorations="Underline"
+                >Enter the quantum:</TextBlock>
+        <TextBox Visibility="Hidden" x:Name="quantumValue" Width="50" Height="50" Margin="238,347,512,37" HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center">
+            
+        </TextBox>
     </Grid>
 </Window>
