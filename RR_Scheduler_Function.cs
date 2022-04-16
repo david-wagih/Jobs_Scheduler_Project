@@ -1,111 +1,185 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
+
+public class Process
+{
+    public int arrival;
+    public int index;
+    public int burst_time;
+    public int priority;
+
+    public Process() { }
+
+    public Process(int i, int value, int b)
+    {
+        index = i;
+        arrival = value;
+        burst_time = b;
+    }
+
+    public Process(int i, int value, int b, int p)
+    {
+        index = i;
+        arrival = value;
+        burst_time = b;
+        priority = p;
+    }
+
+    public static void sort(List<Process> l)
+    {
+        for (int i = 0; i < l.Count; i++)
+        {
+            for (int j = 0; j < l.Count; j++)
+            {
+                if (l[i].arrival < l[j].arrival)
+                {
+                    Process temp = l[i];
+                    l[i] = l[j];
+                    l[j] = temp;
+                }
+            }
+        }
+    }
+}
+
 
 public class RR_Scheduler_Function
 {
-    public static float avg_wait;
+    public static int quantum;
+    public static int prcs_no; //
+    public static int[] arrivalTime; //
+    public static int[] cpu_brustTime; //
+    public static int[] prc; //
+    public static int[] start;
+    public static int[] end;
+    public static int[] wait; //
+    public static float avg_wait; //
+    public static int last;
+    public const int MAXX = 1000;
 
-    public static Tuple<int, int>[] RR_Scheduler_Function(int[] arrival, int[] burst, int quantum)
+
+    public static void RR_Scheduler_Function(int[] a, int[] b, int q)
     {
-        int prcs_no = arrival.Length;
-        int[] tmp_arrival = new int[prcs_no];
-        int[] tmp_burst = new int[prcs_no];
+        prcs_no = a.Length;
+        arrivalTime = a;
+        cpu_brustTime = b;
+        prc = new int[MAXX];
+        start = new int[MAXX];
+        end = new int[MAXX];
+        wait = new int[MAXX];
+        quantum = q;
 
-        for (int i = 0; i < prcs_no; i++)
+        for (int i = 0; i < MAXX; i++)
         {
-            tmp_arrival[i] = arrival[i];
-            tmp_burst[i] = burst[i];
+            prc[i] = -1;
+            start[i] = 0;
+            end[i] = 0;
+            wait[i] = 0;
         }
 
+        List<Process> p = new List<Process>(prcs_no);
+        for (int i = 0; i < prcs_no; i++)
+            p.Add(new Process(i, arrivalTime[i], cpu_brustTime[i]));
+        
+        Process.sort(p);
+
         int clk = 0;
-        int it = 0;
-        int[] wait = new int[prcs_no];
-        Tuple<int, int>[] res = new Tuple<int, int>[100];
+        int idx = 0;
 
-        while (true)
+        while (p.Count != 0)
         {
-            bool flag = true;
-            for (int i = 0; i < prcs_no; i++)
+            List<Process> ready = new List<Process>(prcs_no);
+
+            if (p.First().arrival > clk)
             {
-                if (tmp_arrival[i] <= clk)
-                {
-                    if (tmp_arrival[i] <= quantum)
-                    {
-                        if (tmp_burst[i] > 0)
-                        {
-                            flag = false;
-                            if (tmp_burst[i] > quantum)
-                            {
-                                clk += quantum;
-                                res[it++] = new Tuple<int, int>(i + 1, quantum);
-                                tmp_burst[i] -= quantum;
-                                tmp_arrival[i] += quantum;
-                            }
-                            else
-                            {
-                                clk += tmp_burst[i];
-                                wait[i] = clk - burst[i] - arrival[i];
-                                res[it++] = new Tuple<int, int>(i + 1, tmp_burst[i]);
-                                tmp_burst[i] = 0;
-                            }
-                        }
-                    }
-                    else if (tmp_arrival[i] > quantum)
-                    {
-                        for (int j = 0; j < prcs_no; j++)
-                        {
-                            if (tmp_arrival[j] < tmp_arrival[i])
-                            {
-                                if (tmp_burst[j] > 0)
-                                {
-                                    flag = false;
-                                    if (tmp_burst[j] > quantum)
-                                    {
-                                        clk += quantum;
-                                        res[it++] = new Tuple<int, int>(j + 1, quantum);
-                                        tmp_burst[j] -= quantum;
-                                        tmp_arrival[j] += quantum;
-                                    }
-                                    else
-                                    {
-                                        clk += tmp_burst[j];
-                                        wait[j] = clk - burst[j] - arrival[j];
-                                        res[it++] = new Tuple<int, int>(j + 1, tmp_burst[j]);
-                                        tmp_burst[j] = 0;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (tmp_burst[i] > 0)
-                        {
-                            flag = false;
-                            if (tmp_burst[i] > quantum)
-                            {
-                                clk += quantum;
-                                res[it++] = new Tuple<int, int>(i + 1, quantum);
-                                tmp_burst[i] -= quantum;
-                                tmp_arrival[i] += quantum;
-                            }
-                            else
-                            {
-                                clk += tmp_burst[i];
-                                wait[i] = clk - burst[i] - arrival[i];
-                                res[it++] = new Tuple<int, int>(i + 1, tmp_burst[i]);
-                                tmp_burst[i] = 0;
-                            }
-                        }
-                    }
-                }
-
-                else if (tmp_arrival[i] > clk)
-                {
-                    clk++;
-                    i--;
-                }
+                start[idx] = clk;
+                end[idx] = p.First().arrival;
+                prc[idx] = -1;
+                idx++;
+                clk = p.First().arrival;
             }
 
-            if (flag) break;
+            for (int i = 0, j = 0; j < p.Count; i++)
+            {
+                if (p[j].arrival <= clk)
+                {
+                    ready.Add(p[j]);
+                    p.RemoveAt(j);
+                }
+                else j++;
+            }
+
+            while (ready.Count != 0)
+            {
+                Process readyProcess = ready[0];
+                ready.RemoveAt(0);
+
+                if (quantum < readyProcess.burst_time)
+                {
+                    start[idx] = clk;
+                    end[idx] = clk + quantum;
+                    prc[idx] = readyProcess.index;
+                    clk += quantum;
+                    readyProcess.burst_time -= quantum;
+
+                    for (int i = 0, j = 0; j < p.Count; i++)
+                    {
+                        if (p[j].arrival <= clk)
+                        {
+                            ready.Add(p[j]);
+                            p.RemoveAt(j);
+                        }
+                        else j++;
+                    }
+
+                    ready.Add(readyProcess);
+                    idx++;
+                }
+                else
+                {
+                    start[idx] = clk;
+                    end[idx] = clk + readyProcess.burst_time;
+                    prc[idx] = readyProcess.index;
+                    clk += readyProcess.burst_time;
+
+                    for (int i = 0, j = 0; j < p.Count; i++)
+                    {
+                        if (p[j].arrival <= clk)
+                        {
+                            ready.Add(p[j]);
+                            p.RemoveAt(j);
+                        }
+                        else j++;
+                    }
+
+                    idx++;
+                }
+            }
+        }
+
+        for (int j = 0; j < prcs_no; j++)
+        {
+            bool k = false;
+            int w = 0;
+            for (int i = 0; i <= idx; i++)
+            {
+                if (prc[i] == j)
+                {
+                    if (!k)
+                    {
+                        wait[j] = start[i] - arrivalTime[j];
+                        k = true;
+                        w = end[i];
+                    }
+                    else if (k)
+                    {
+                        wait[j] += start[i] - w;
+                        w = end[i];
+                    }
+                }
+            }
         }
 
         avg_wait = 0.0f;
@@ -114,7 +188,7 @@ public class RR_Scheduler_Function
 
         avg_wait /= prcs_no;
 
-        return res;
+        last = idx;
 
     }
 }
