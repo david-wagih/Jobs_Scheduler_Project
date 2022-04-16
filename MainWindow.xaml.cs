@@ -23,11 +23,15 @@ namespace JobsScheduler
     {
         public int noOfProcesses = 0;
         public string schedulerType = null;
+        public int quantumTime;
         public MainWindow()
         {
+
             InitializeComponent();
         }
 
+
+        
 
 
         private void Next_Button_Click(object sender, RoutedEventArgs e)
@@ -51,7 +55,8 @@ namespace JobsScheduler
                     // need to navigate to new window after updating the public variable of no of processes
                     noOfProcesses = NumberOfProcesses;
                     schedulerType = Combo_Value.Text;
-                    var newForm = new Details(noOfProcesses, schedulerType); //create your new form.
+                    quantumTime = Int32.Parse(quantumValue.Text);
+                    var newForm = new Details(noOfProcesses, schedulerType , quantumTime); //create your new form.
                     newForm.Show(); //show the new form.
                 }
             }
@@ -67,6 +72,16 @@ namespace JobsScheduler
         private void ProcessesNo_Input_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            String value = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content as string;
+            if (value == "Round Robin")
+            {
+                quantumBlock.Visibility = Visibility.Visible;
+                quantumValue.Visibility = Visibility.Visible;
+            }
         }
     }
 }

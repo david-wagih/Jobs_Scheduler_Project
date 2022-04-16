@@ -22,14 +22,17 @@ namespace JobsScheduler
     public partial class Details : Window
     {
         public List<Process> myProcesses = new();
+        public List<outputProcesses > outputProcesses = new(); // this list is for the output to be drawn on the chart
         public int processesNumber;
         public string schedulerType;
+        public int quantumValue;
 
 
-        public Details(int Number, string type)
+        public Details(int Number, string type , int? quantumTime)
         {
             processesNumber = Number;
             schedulerType = type;
+            quantumValue = (int)quantumTime;
             InitializeComponent();
             try
             {
@@ -53,11 +56,11 @@ namespace JobsScheduler
                     arrivalTime = process.arrivalTime,
                     burstTime = process.burstTime,
                     priority = process.priority,
-                    quantumTime = process.quantumTime,
                 });
                 // here myProcesses variable contains the User Input data for each Process and this list should be used in each algo according to Scheduler type
                 if(schedulerType == "FCFS")
                 {
+
 
                 }else if(schedulerType == "SJF Preemptive"){
 
@@ -76,7 +79,7 @@ namespace JobsScheduler
             }
 
             // here we need to write the Drawing logic for the Gantt Chart
-            var newForm = new Chart(myProcesses);
+            var newForm = new Chart(outputProcesses);
             newForm.Show();
         }
     }

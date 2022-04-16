@@ -61,7 +61,7 @@ namespace JobsScheduler {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/JobsScheduler;V1.0.0.0;component/chart.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/JobsScheduler;component/chart.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Chart.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

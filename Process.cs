@@ -11,8 +11,6 @@ namespace JobsScheduler
         public string processNumber { get; set; }
         public float arrivalTime { get; set; }
         public float burstTime { get; set; }
-        public float? priority { get; set; }
-        public float? quantumTime { get; set; }
-        public float? usingTime { get; set; }
+        public Int32? priority { get; set; }
     }
 }

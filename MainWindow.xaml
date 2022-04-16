@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobsScheduler"
         mc:Ignorable="d"
-        Title="Home" Height="450" Width="800">
+        Title="Home" Height="500" Width="1000">
     <Grid>
         <TextBlock
             Margin="5"
@@ -16,10 +16,19 @@
         <TextBlock
             FontSize="15"
             TextDecorations="Underline"
-            Margin="35"
+            Margin="35,35,35,117"
             >Choose your prefered Scheduler:</TextBlock>
-        <StackPanel Margin="65">
+        <StackPanel Margin="51,64,135,101" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.109"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
             <ComboBox
+                SelectionChanged="ComboBox_SelectionChanged"
                 x:Name="Combo_Value"
                 HorizontalAlignment="Left"
                 Width="200"
@@ -43,13 +52,10 @@
                 InputScope="Number"
                 Width="50"
                 Height="30"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Margin="5"
                 
-                ></TextBox>
+                />
             <TextBlock
                 Visibility="Visible"
                 TextAlignment="Center"
@@ -66,11 +72,22 @@
                 BorderThickness="1.5"
                 FontSize="15"
                 Height="30"
-                Margin="20"
                 Width="150"
-                >Next</Button>
-            
-        </StackPanel>
+                Content="Next"
+                />
 
-    </Grid> 
+
+        </StackPanel>
+        <TextBlock
+            Visibility="Hidden"
+            x:Name="quantumBlock"
+                TextAlignment="Center"
+                Margin="98,338,597,78"
+                TextDecorations="Underline"
+                >Enter the quantum:</TextBlock>
+        <TextBox Visibility="Hidden" x:Name="quantumValue" Width="50" Height="50" Margin="238,347,512,37" HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center">
+            
+        </TextBox>
+    </Grid>
 </Window>

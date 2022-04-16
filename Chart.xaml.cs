@@ -20,23 +20,23 @@ namespace JobsScheduler
     public partial class Chart : Window
     {
         public List<Rectangle> rectList = new List<Rectangle>();
-        public Chart(List<Process> ourProcesses)
+        public Chart(List<outputProcesses> ourProcesses)
         {
             InitializeComponent();
             CreateChart(ourProcesses);
 
         }
 
-        public void CreateChart(List<Process> listOfProcesses)
+        public void CreateChart(List<outputProcesses> listOfProcesses)
         {
             double ctr =0;
             
             for(int i = 0; i < listOfProcesses.Count; i++)
             {
                 StackPanel stackPanel = new StackPanel();
-                Process process = listOfProcesses[i];
+                outputProcesses process = listOfProcesses[i];
                 Rectangle rectangle = new();
-                rectangle.Width = process.burstTime * 10;
+                rectangle.Width = process.usingTime * 10;
                 rectangle.Fill = new SolidColorBrush(System.Windows.Media.Colors.Violet);
                 rectangle.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
                 rectangle.StrokeThickness = 1;
@@ -53,13 +53,13 @@ namespace JobsScheduler
                 startTime.HorizontalAlignment = HorizontalAlignment.Left;
                 startTime.VerticalAlignment = VerticalAlignment.Center;
                 startTime.FontSize = 15;
-                //startTime.Text = process.arrivalTime.ToString();
+                startTime.Text = process.startTime.ToString();
 
                 TextBlock usingTime = new();
                 usingTime.HorizontalAlignment = HorizontalAlignment.Center;
                 usingTime.VerticalAlignment = VerticalAlignment.Center;
                 usingTime.FontSize = 15;
-                usingTime.Text = (process.burstTime).ToString();
+                usingTime.Text = (process.usingTime).ToString();
 
                 stackPanel.Children.Add(usingTime);
                 stackPanel.Children.Add(rectangle);
