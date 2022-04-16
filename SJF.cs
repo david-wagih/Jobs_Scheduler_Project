@@ -13,6 +13,9 @@ namespace JobsScheduler
     class SJF
 
     {
+        public static float avg_waiting = 0;
+        public static List<outputProcesses> output_processes = new List<outputProcesses>();
+
         public static void Arrival_sort(List<Process> processes)
         {
             Process[] temp = new Process[1];
@@ -32,27 +35,24 @@ namespace JobsScheduler
         }
 
 
-        public static Tuple<int, int>[] SJF_P(List<Process> processes,ref float avg_waiting)
+        public static void SJF_P(List<Process> processes)
         {
-            Tuple<int, int>[] sched_Processes = new Tuple<int, int>[100];
+            //Tuple<int, int>[] sched_Processes = new Tuple<int, int>[100];
+            //List<Process> output_processes = new List<Process>();
+
             Tuple<int, int> wait;
-            int[] start_time = new int[40];
-            int[] remainingT = new int[processes.Count];
-            int[] waiting_time = new int[processes.Count];
+            float[] start_time = new float[40];
+            float[] remainingT = new float[processes.Count];
+            float[] waiting_time = new float[processes.Count];
             int counter = 0;
-            int time = 0;
-            int shortest_index = 0, finish_time;
+            float time = 0;
+            int shortest_index = 0;
+            float finish_time;
             int st_iter = 0;
             int it = 0;
-            int min = int.MaxValue;
+            float min = float.MaxValue;
             bool job_flag = false;
             bool enter_flag = false;
-
-            //set array values to class attributes
-            /*for (int i = 0; i < p_num; i++)
-            {
-                processes[i] = new Process(i + 1, AT[i], BT[i]);
-            }*/
 
             Arrival_sort(processes);
 
@@ -87,8 +87,10 @@ namespace JobsScheduler
 
                 if (enter_flag)
                 {
-                    wait = new Tuple<int, int>(processes[shortest_index].processNumber, 0);
-                    sched_Processes[it++] = wait;
+                    // wait = new Tuple<int, int>(processes[shortest_index].processNumber, 0);
+                    //sched_Processes[it++] = wait
+                    output_processes[it++].processNumber = processes[shortest_index].processNumber;
+
                 }
 
                 remainingT[shortest_index]--;
@@ -121,12 +123,14 @@ namespace JobsScheduler
             }
 
             start_time[st_iter] = time;
-            int[] d_start_time = start_time.Distinct().ToArray();
+            float[] d_start_time = start_time.Distinct().ToArray();
             int it2 = 0;
             for (int i = 0; i < d_start_time.Length - 1; i++)
             {
-                wait = new Tuple<int, int>(sched_Processes[it2].Item1, d_start_time[i + 1] - d_start_time[i]);
-                sched_Processes[it2++] = wait;
+                //wait = new Tuple<int, int>(sched_Processes[it2].Item1, d_start_time[i + 1] - d_start_time[i]);
+                //sched_Processes[it2++] = wait;
+                output_processes[it2++].usingTime = d_start_time[i + 1] - d_start_time[i];
+
 
             }
 
@@ -137,7 +141,7 @@ namespace JobsScheduler
 
             avg_waiting = avg_waiting / processes.Count;
 
-            return sched_Processes;
+           
         }
 
 
