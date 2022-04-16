@@ -3,25 +3,32 @@ using System.Collections.Generic;
 
 public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
 {
+    public ProcessWrapper(JobsScheduler.Process p)
+    {
+        this.arrivalTime = p.arrivalTime;
+        this.burstTime = p.burstTime;
+    }
+
     int IComparable<ProcessWrapper>.CompareTo(ProcessWrapper other)
     {
-        if (this.arrivalTime >= other.arrivalTime) return -1;
-        else return 1;
+        if (this.arrivalTime >= other.arrivalTime) return 1;
+        else return -1;
     }
 }
 
 public class FCFS_Scheduler
 {
 
-    List<ProcessWrapper> OrderOfExecution;
-    float averageWaitingTime;
+    public List<ProcessWrapper> OrderOfExecution;
+    public float averageWaitingTime;
 
-    FCFS_Scheduler(List<JobsScheduler.Process> processes)
+    public FCFS_Scheduler(List<JobsScheduler.Process> processes)
     {
         OrderOfExecution = new List<ProcessWrapper>();
         foreach (var process in processes)
         {
-            OrderOfExecution.Add((ProcessWrapper)process);
+            ProcessWrapper pw = new ProcessWrapper(process);
+            OrderOfExecution.Add(pw);
         }
 
         OrderOfExecution.Sort();
