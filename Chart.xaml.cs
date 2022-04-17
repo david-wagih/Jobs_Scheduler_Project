@@ -36,7 +36,7 @@ namespace JobsScheduler
                 StackPanel stackPanel = new StackPanel();
                 outputProcesses process = listOfProcesses[i];
                 Rectangle rectangle = new();
-                rectangle.Width = process.usingTime * 10;
+                rectangle.Width = process.usingTime * 15;
                 rectangle.Fill = new SolidColorBrush(System.Windows.Media.Colors.Violet);
                 rectangle.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
                 rectangle.StrokeThickness = 1;
@@ -46,19 +46,19 @@ namespace JobsScheduler
                 TextBlock ProcessName = new();
                 ProcessName.HorizontalAlignment = HorizontalAlignment.Center;
                 ProcessName.VerticalAlignment = VerticalAlignment.Center;
-                ProcessName.FontSize = 15;
+                ProcessName.FontSize = 12;
                 ProcessName.Text = process.processNumber.ToString();
 
                 TextBlock startTime = new();
                 startTime.HorizontalAlignment = HorizontalAlignment.Left;
                 startTime.VerticalAlignment = VerticalAlignment.Center;
-                startTime.FontSize = 15;
+                startTime.FontSize = 12;
                 startTime.Text = process.startTime.ToString();
 
                 TextBlock usingTime = new();
                 usingTime.HorizontalAlignment = HorizontalAlignment.Center;
                 usingTime.VerticalAlignment = VerticalAlignment.Center;
-                usingTime.FontSize = 15;
+                usingTime.FontSize = 12;
                 usingTime.Text = process.usingTime.ToString();
 
                 TextBlock averageWaitingTimeBlock = new();

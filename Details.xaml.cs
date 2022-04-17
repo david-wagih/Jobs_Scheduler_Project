@@ -25,7 +25,7 @@ namespace JobsScheduler
         public List<outputProcesses > outputProcesses = new(); // this list is for the output to be drawn on the chart
         public int processesNumber;
         public string schedulerType;
-        public int? quantumValue;
+        public int quantumValue;
         public float avgWait;
 
 
@@ -33,7 +33,7 @@ namespace JobsScheduler
         {
             processesNumber = Number;
             schedulerType = type;
-            quantumValue = quantumTime;
+            quantumValue = (int)quantumTime;
             InitializeComponent();
             try
             {
@@ -78,6 +78,11 @@ namespace JobsScheduler
                 }
                 else
                 {
+                    // call the method responsible for doing the logic
+                    RR_Scheduler_Function.RRSchedulerFunction(myProcesses , quantumValue);
+                    outputProcesses = RR_Scheduler_Function.outputList;
+                    avgWait = RR_Scheduler_Function.avg_wait;
+
                     // Round Robin Case
                 }
             }
