@@ -44,7 +44,7 @@ namespace JobsScheduler
                 average_waiting += waiting_time[i];
             }
 
-            return avg_waiting = average_waiting / iterator;
+            return average_waiting = average_waiting / iterator;
         }
         public static void assignUsingTime(float[] start_time, string[] process_entry, List<outputProcesses> output_processes, int size)
         {

@@ -89,7 +89,7 @@ namespace JobsScheduler
                 enter_flag = false;
                 for (int i = 0; i < processes.Count; i++)
                 {
-                    var condition = (type == "SJF Preemptive") ? (remainingT[i] < min) : (processes[i].priority < min);
+                    bool condition = (type == "SJF Preemptive") ? (remainingT[i] < min) : ((float)processes[i].priority < min);
 
                     if ((processes[i].arrivalTime <= time) && condition && (remainingT[i] > 0))
                     {
