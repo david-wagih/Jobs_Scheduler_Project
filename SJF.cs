@@ -55,7 +55,7 @@ namespace JobsScheduler
             for (int i = 0; i < processes.Count; i++)
                 remainingT[i] = processes[i].burstTime;
 
-            if (processes[1].arrivalTime > time)
+            if (processes[0].arrivalTime > time)
             {
                 idle_flag = true;
             }
