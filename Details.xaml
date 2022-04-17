@@ -1,0 +1,35 @@
+﻿<Window x:Class="JobsScheduler.Details"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobsScheduler"
+        mc:Ignorable="d"
+        Title="Details" Height="500" Width="1000">
+    <Grid>
+        <DataGrid
+            Height="380" 
+            Width="1000"
+            Name="ourGrid"
+            RowHeight="60"
+            ColumnWidth="200"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            CanUserAddRows="True"
+            HorizontalScrollBarVisibility="Hidden"
+            >
+
+        </DataGrid>
+        <Button 
+                Click="GetChart_Click"
+                Margin="0,420,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Width="60"
+                Height="36"
+                BorderThickness="2"
+                Cursor="Hand"
+                >
+            Get Chart</Button>
+    </Grid>
+</Window>
