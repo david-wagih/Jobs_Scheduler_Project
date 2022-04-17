@@ -48,12 +48,17 @@ namespace JobsScheduler
             float min = float.MaxValue;
             bool job_flag = false;
             bool enter_flag = false;
+            bool idle_flag = false;
 
             Arrival_sort(processes);
 
             for (int i = 0; i < processes.Count; i++)
                 remainingT[i] = processes[i].burstTime;
 
+            if (processes[1].arrivalTime > time)
+            {
+                idle_flag = true;
+            }
 
             while (counter < processes.Count)
             {
@@ -61,12 +66,14 @@ namespace JobsScheduler
                 enter_flag = false;
                 for (int i = 0; i < processes.Count; i++)
                 {
+
                     if ((processes[i].arrivalTime <= time) && (remainingT[i] < min) && (remainingT[i] > 0))
                     {
                         shortest_index = i;
                         min = remainingT[i];
                         job_flag = true;
                         enter_flag = true;
+
                     }
 
                 }
@@ -78,11 +85,19 @@ namespace JobsScheduler
                     continue;
                 }
 
-                if (enter_flag)
+                if (idle_flag)
+                {
+                    start_time[st_iter++] = 0;
+                    output_processes.Add(new outputProcesses { processNumber = "idle", startTime = 0 });
+                    idle_flag = false;
+
+                }
+                if (enter_flag && !idle_flag)
                 {
                     start_time[st_iter++] = time;
                     output_processes.Add(new outputProcesses { processNumber = processes[shortest_index].processNumber, startTime = time });
                 }
+
 
                 remainingT[shortest_index]--;
                 min = remainingT[shortest_index];
