@@ -16,7 +16,7 @@ namespace JobsScheduler
         public static float avg_waiting = 0;
         public static List<outputProcesses> output_processes = new List<outputProcesses>();
 
-        public static void Arrival_sort(List<Process> processes)
+        /*public static void Arrival_sort(List<Process> processes)
         {
             Process[] temp = new Process[1];
 
@@ -32,29 +32,22 @@ namespace JobsScheduler
                     }
                 }
             }
-        }
+        }*/
 
 
-        public static float getAvgWaiting(int iterator, float[] waiting_time)
-        {
-            float average_waiting = 0;
-            for (int i = 0; i < iterator; i++)
-            {
-                average_waiting += waiting_time[i];
-            }
+        //public static float getAvgWaiting(int iterator, float[] waiting_time)
+        //{
 
-            return average_waiting = average_waiting / iterator;
-        }
-        public static void assignUsingTime(float[] start_time, string[] process_entry, List<outputProcesses> output_processes, int size)
-        {
+        //}
+        /* public static void assignUsingTime(float[] start_time, string[] process_entry,List<outputProcesses> output_processes,int size)
+         {
 
-            for (int i = 0; i < size; i++)
-            {
-                output_processes.Add(new outputProcesses { processNumber = process_entry[i], usingTime = start_time[i + 1] - start_time[i], startTime = start_time[i] });
+             for (int i = 0; i < size; i++)
+             {
+                 output_processes.Add(new outputProcesses { processNumber = process_entry[i], usingTime = start_time[i + 1] - start_time[i],startTime=start_time[i] });
 
-            }
-        }
-
+             }
+         }*/
 
         public static void Preemptive_Scheduler(List<Process> processes, string type)
         {
@@ -72,7 +65,22 @@ namespace JobsScheduler
             bool job_flag = false;
             bool enter_flag = false;
 
-            Arrival_sort(processes);
+
+            Process temp = new Process();
+
+            for (int i = 0; i < processes.Count; i++)
+            {
+                for (int n = i + 1; n < processes.Count - 1; n++)
+                {
+                    if (processes[n].arrivalTime < processes[i].arrivalTime)
+                    {
+                        temp = processes[i];
+                        processes[i] = processes[n];
+                        processes[n] = temp;
+                    }
+                }
+            }
+            //Arrival_sort(processes);
 
             for (int i = 0; i < processes.Count; i++)
                 remainingT[i] = processes[i].burstTime;
@@ -152,12 +160,25 @@ namespace JobsScheduler
             }
 
             start_time[st_iter] = time;
-            assignUsingTime(start_time, Process_entry, output_processes, p_it);
-            avg_waiting = getAvgWaiting(processes.Count, waiting_time);
+            //assignUsingTime(start_time, Process_entry, output_processes, p_it);
+            for (int i = 0; i < p_it; i++)
+            {
+                output_processes.Add(new outputProcesses { processNumber = Process_entry[i], usingTime = start_time[i + 1] - start_time[i], startTime = start_time[i] });
+
+            }
+
+            //avg_waiting = getAvgWaiting(processes.Count, waiting_time);
+            float average_waiting = 0;
+            for (int i = 0; i < processes.Count; i++)
+            {
+                average_waiting += waiting_time[i];
+            }
+
+            avg_waiting = average_waiting / processes.Count;
+
 
         }
-
-        }
+    }
 
 
     }
