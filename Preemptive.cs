@@ -45,11 +45,13 @@ namespace JobsScheduler
 
             return average_waiting = average_waiting / iterator;
         }
-        public static void assignUsingTime(float[] start_time, List<outputProcesses> output_processes)
+        public static void assignUsingTime(float[] start_time, string[] process_entry, List<outputProcesses> output_processes, int size)
         {
-            for (int i = 0; i < output_processes.Count; i++)
+
+            for (int i = 0; i < size; i++)
             {
-                output_processes[i].usingTime = start_time[i + 1] - start_time[i];
+                output_processes.Add(new outputProcesses { processNumber = process_entry[i], usingTime = start_time[i + 1] - start_time[i], startTime = start_time[i] });
+
             }
         }
 
@@ -57,6 +59,7 @@ namespace JobsScheduler
         public static void Preemptive_Scheduler(List<Process> processes, string type)
         {
             float[] start_time = new float[40];
+            string[] Process_entry = new string[40];
             float[] remainingT = new float[processes.Count];
             float[] waiting_time = new float[processes.Count];
             int counter = 0;
@@ -64,6 +67,7 @@ namespace JobsScheduler
             int proc_index = 0;
             float finish_time;
             int st_iter = 0;
+            int p_it = 0;
             float min = float.MaxValue;
             bool job_flag = false;
             bool enter_flag = false;
@@ -76,7 +80,7 @@ namespace JobsScheduler
             if (processes[0].arrivalTime > time)
             {
                 start_time[st_iter++] = 0;
-                output_processes.Add(new outputProcesses { processNumber = "idle", startTime = 0 });
+                Process_entry[p_it++] = "idle";
             }
 
             while (counter < processes.Count)
@@ -110,7 +114,7 @@ namespace JobsScheduler
                 if (enter_flag)
                 {
                     start_time[st_iter++] = time;
-                    output_processes.Add(new outputProcesses { processNumber = processes[proc_index].processNumber, startTime = time });
+                    Process_entry[p_it++] = processes[proc_index].processNumber;
                 }
 
 
@@ -148,12 +152,13 @@ namespace JobsScheduler
             }
 
             start_time[st_iter] = time;
-            assignUsingTime(start_time, output_processes);
+            assignUsingTime(start_time, Process_entry, output_processes, p_it);
             avg_waiting = getAvgWaiting(processes.Count, waiting_time);
 
+        }
 
         }
-    
-    
-}
+
+
+    }
 
