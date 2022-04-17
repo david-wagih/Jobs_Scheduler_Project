@@ -10,6 +10,6 @@ namespace JobsScheduler
     {
         public String processNumber { get; set; }
         public float? startTime { get; set; }
-        public float usingTime { get; set; }
+        public float? usingTime { get; set; }
     }
 }

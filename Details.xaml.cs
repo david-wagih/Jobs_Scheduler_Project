@@ -66,24 +66,32 @@ namespace JobsScheduler
                     avgWait = s1.averageWaitingTime;
 
 
-                }else if(schedulerType == "SJF Preemptive"){
-
-                }else if(schedulerType == "SJF Non-Preemptive")
+                }else if(schedulerType == "SJF Preemptive" || schedulerType == "Priority Preemptive")
                 {
+                    Preemptive_Schedulers.Preemptive_Scheduler(myProcesses , schedulerType);
+                    outputProcesses = Preemptive_Schedulers.output_processes;
+                    avgWait = Preemptive_Schedulers.avg_waiting;
 
-                }else if (schedulerType == "Priority Non-Preemptive") { 
                 }
-                else if (schedulerType == "Priority Preemptive")
+                else if(schedulerType == "SJF Non-Preemptive")
                 {
+                    NonPreemptive_Schedulers n1 = new NonPreemptive_Schedulers("SJF",  myProcesses);
+                    outputProcesses = n1.outputList;
+                    avgWait = n1.averageWaitingT;
+                }
+                else if(schedulerType == "Priority Non-Preemptive")
+                {
+                    NonPreemptive_Schedulers n1 = new NonPreemptive_Schedulers("Priority", myProcesses);
+                    outputProcesses = n1.outputList;
+                    avgWait = n1.averageWaitingT;
                 }
                 else
                 {
-                    // call the method responsible for doing the logic
+                    // Round Robin Case
                     RR_Scheduler_Function.RRSchedulerFunction(myProcesses , quantumValue);
                     outputProcesses = RR_Scheduler_Function.outputList;
                     avgWait = RR_Scheduler_Function.avg_wait;
 
-                    // Round Robin Case
                 }
             }
 

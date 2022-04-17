@@ -36,7 +36,7 @@ namespace JobsScheduler
                 StackPanel stackPanel = new StackPanel();
                 outputProcesses process = listOfProcesses[i];
                 Rectangle rectangle = new();
-                rectangle.Width = process.usingTime * 15;
+                rectangle.Width = (double)(process.usingTime * 15);
                 rectangle.Fill = new SolidColorBrush(System.Windows.Media.Colors.Violet);
                 rectangle.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
                 rectangle.StrokeThickness = 1;
