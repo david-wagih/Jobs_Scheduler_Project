@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace JobsScheduler
 {
 
-    class SJF
+    class Preemptive
 
     {
         public static float avg_waiting = 0;
@@ -153,109 +153,8 @@ namespace JobsScheduler
 
 
         }
-    
-     public static void Priority_P(List<Process> processes)
-        {
-            //Tuple<int, int>[] sched_Processes = new Tuple<int, int>[100];
-            //Tuple<int, int> wait;
-            int[] remainingT = new int[processes.Count];
-            int[] waiting_time = new int[processes.Count];
-            int counter = 0;
-            float time = 0;
-            int most_imp = 0;
-            float finish_time;
-            float[] start_time = new float[40];
-            int st_iter = 0;
-            float min = float.MaxValue;
-            int it = 0;
-            bool job_flag = false;
-            bool enter_flag = false;
-         
 
-            /*for(int i=0;i<p_num;i++){
-                processes[i]=new Process(i+1,AT[i],BT[i],P[i]);
-            }*/
-            Arrival_sort(processes);
-            for (int i = 0; i < processes.Count; i++)
-                remainingT[i] = processes[i].burstTime;
-
-
-
-
-            while (counter < processes.Count)
-            {
-
-                enter_flag = false;
-                for (int i = 0; i < processes.Count; i++)
-                {
-                    if ((processes[i].arrivalTime <= time) && (processes[i].priority < min) && (remainingT[i] > 0))
-                    {
-                        most_imp = i;
-                        min = processes[i].priority;
-                        job_flag = true;
-                        enter_flag = true;
-                        start_time[st_iter++] = time;
-
-                    }
-
-                }
-
-
-                if (job_flag == false)
-                {
-                    time++;
-                    continue;
-                }
-
-                if (enter_flag)
-                {
-                   
-                    output_processes.Add(new outputProcesses{processNumber=processes[most_imp].processNumber});
-
-
-                }
-
-                remainingT[most_imp]--;
-
-                if (remainingT[most_imp] == 0)
-                {
-                    processes[most_imp].priority = int.MaxValue;
-                    min = int.MaxValue;
-                    counter++;
-                    job_flag = false;
-                    finish_time = time + 1.0;
-                    waiting_time[most_imp] = finish_time -
-                                processes[most_imp].arrivalTime -
-                                processes[most_imp].burstTime;
-
-                    if (waiting_time[most_imp] < 0)
-                        waiting_time[most_imp] = 0;
-                }
-
-
-                time++;
-            }
-
-            start_time[st_iter] = time;
-            float[] d_start_time = start_time.Distinct().ToArray();
-            int it2 = 0;
-            for (int i = 0; i < d_start_time.Length - 1; i++)
-            {
-               output_processes[it2].usingTime = d_start_time[i + 1] - d_start_time[i];
-               output_processes[it2].startTime = d_start_time[i];
-               it2++;
-
-
-            }
-
-
-            for (int i = 0; i < processes.Count; i++)
-            {
-                avg_waiting = avg_waiting + waiting_time[i];
-            }
-            avg_waiting = avg_waiting / processes.Count;
-
-        }
+    }
 
 }
 
