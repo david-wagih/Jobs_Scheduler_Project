@@ -49,6 +49,9 @@ namespace JobsScheduler
 
         public void GetChart_Click(object sender, RoutedEventArgs e)
         {
+            myProcesses.Clear();
+            outputProcesses.Clear();
+
             foreach (var process in ourGrid.Items.OfType<Process>())
             {
                 myProcesses.Add(new Process()
@@ -58,6 +61,7 @@ namespace JobsScheduler
                     burstTime = process.burstTime,
                     priority = process.priority,
                 });
+            }
                 // here myProcesses variable contains the User Input data for each Process and this list should be used in each algo according to Scheduler type
                 if(schedulerType == "FCFS")
                 {
@@ -93,11 +97,12 @@ namespace JobsScheduler
                     avgWait = RR_Scheduler_Function.avg_wait;
 
                 }
-            }
+            
 
             // here we need to write the Drawing logic for the Gantt Chart
             var newForm = new Chart(outputProcesses , avgWait);
             newForm.Show();
+            //this.Close();
         }
     }
 }
