@@ -44,7 +44,7 @@
                 TextDecorations="Underline"
                 Margin="50"
                 FontSize="15"
-                >Please Enter number of Processes from one to five:</TextBlock>
+                >Please Enter number of Processes:</TextBlock>
             <TextBox
                 Text="1"
                 x:Name="ProcessesNo_Input"
