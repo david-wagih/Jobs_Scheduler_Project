@@ -36,6 +36,7 @@ namespace JobsScheduler
 
         private void Next_Button_Click(object sender, RoutedEventArgs e)
         {
+            noOfProcesses = 0;
             try
             {
                 int NumberOfProcesses = Int32.Parse(ProcessesNo_Input.Text);
