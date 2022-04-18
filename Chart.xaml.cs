@@ -20,14 +20,14 @@ namespace JobsScheduler
     public partial class Chart : Window
     {
         public List<Rectangle> rectList = new List<Rectangle>();
-        public Chart(List<outputProcesses> ourProcesses)
+        public Chart(List<outputProcesses> ourProcesses , float averageWaitingTime)
         {
             InitializeComponent();
-            CreateChart(ourProcesses);
+            CreateChart(ourProcesses , averageWaitingTime);
 
         }
 
-        public void CreateChart(List<outputProcesses> listOfProcesses)
+        public void CreateChart(List<outputProcesses> listOfProcesses , float averageWait)
         {
             double ctr =0;
             
@@ -36,7 +36,7 @@ namespace JobsScheduler
                 StackPanel stackPanel = new StackPanel();
                 outputProcesses process = listOfProcesses[i];
                 Rectangle rectangle = new();
-                rectangle.Width = process.usingTime * 10;
+                rectangle.Width = (double)(process.usingTime * 17);
                 rectangle.Fill = new SolidColorBrush(System.Windows.Media.Colors.Violet);
                 rectangle.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
                 rectangle.StrokeThickness = 1;
@@ -46,31 +46,41 @@ namespace JobsScheduler
                 TextBlock ProcessName = new();
                 ProcessName.HorizontalAlignment = HorizontalAlignment.Center;
                 ProcessName.VerticalAlignment = VerticalAlignment.Center;
-                ProcessName.FontSize = 15;
+                ProcessName.FontSize = 12;
                 ProcessName.Text = process.processNumber.ToString();
 
                 TextBlock startTime = new();
                 startTime.HorizontalAlignment = HorizontalAlignment.Left;
                 startTime.VerticalAlignment = VerticalAlignment.Center;
-                startTime.FontSize = 15;
+                startTime.FontSize = 12;
                 startTime.Text = process.startTime.ToString();
 
                 TextBlock usingTime = new();
                 usingTime.HorizontalAlignment = HorizontalAlignment.Center;
                 usingTime.VerticalAlignment = VerticalAlignment.Center;
-                usingTime.FontSize = 15;
-                usingTime.Text = (process.usingTime).ToString();
+                usingTime.FontSize = 12;
+                usingTime.Text = process.usingTime.ToString();
+
+                TextBlock averageWaitingTimeBlock = new();
+                averageWaitingTimeBlock.HorizontalAlignment = HorizontalAlignment.Center;
+                averageWaitingTimeBlock.VerticalAlignment = VerticalAlignment.Center;
+                averageWaitingTimeBlock.FontSize = 15;
+                averageWaitingTimeBlock.Text = "Average Waiting time is: " + averageWait.ToString();
 
                 stackPanel.Children.Add(usingTime);
                 stackPanel.Children.Add(rectangle);
                 stackPanel.Children.Add(startTime);
                 stackPanel.Children.Add(ProcessName);
                 chartGrid.Children.Add(stackPanel);
+                chartGrid.Children.Add(averageWaitingTimeBlock);
+                Canvas.SetTop(averageWaitingTimeBlock, 300);
+                Canvas.SetLeft(averageWaitingTimeBlock, 10);
+
                 Canvas.SetTop(stackPanel, 100);
 
                 if (i == 0)
                 {
-                    Canvas.SetLeft(stackPanel, 0);
+                    Canvas.SetLeft(stackPanel, 10);
 
                 }
                 else

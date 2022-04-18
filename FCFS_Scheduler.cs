@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
@@ -7,6 +7,7 @@ public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
     {
         this.arrivalTime = p.arrivalTime;
         this.burstTime = p.burstTime;
+        this.processNumber = p.processNumber;
     }
 
     int IComparable<ProcessWrapper>.CompareTo(ProcessWrapper other)
@@ -19,15 +20,13 @@ public class ProcessWrapper : JobsScheduler.Process, IComparable<ProcessWrapper>
 public class FCFS_Scheduler
 {
 
-    public List<JobsScheduler.outputProcesses> outputList;
-    public float averageWaitingTime;
+    public List<JobsScheduler.outputProcesses> outputList  = new ();
+    public float averageWaitingTime = 0;
 
     public FCFS_Scheduler(List<JobsScheduler.Process> processes)
     {
-        outputList = new List<JobsScheduler.outputProcesses>();
-        averageWaitingTime = 0;
 
-        List<ProcessWrapper> OrderOfExecution = new List<ProcessWrapper>();
+        List<ProcessWrapper> OrderOfExecution = new ();
         foreach (var process in processes)
         {
             ProcessWrapper pw = new ProcessWrapper(process);
@@ -45,14 +44,14 @@ public class FCFS_Scheduler
         averageWaitingTime -= acc;
         averageWaitingTime = (float)averageWaitingTime / OrderOfExecution.Count;
 
-        int startingTime = 0;
+        float startingTime = 0;
         foreach (var process in OrderOfExecution)
         {
-            JobsScheduler.outputProcesses op = new JobsScheduler.outputProcesses();
+            JobsScheduler.outputProcesses op = new ();
             op.processNumber = process.processNumber;
             op.startTime = startingTime;
             op.usingTime = process.burstTime;
-            this.outputList.Add(op);
+            outputList.Add(op);
             startingTime += process.burstTime;
         }
 

@@ -23,7 +23,7 @@ namespace JobsScheduler
     {
         public int noOfProcesses = 0;
         public string schedulerType = null;
-        public int quantumTime;
+        public int? quantumTime;
         public MainWindow()
         {
 
@@ -39,9 +39,9 @@ namespace JobsScheduler
             try
             {
                 int NumberOfProcesses = Int32.Parse(ProcessesNo_Input.Text);
-                if (NumberOfProcesses < 1 || NumberOfProcesses > 5)
+                if (NumberOfProcesses < 1)
                 {
-                    errorMessage.Text = "please enter numbers only between 1 and 5";
+                    errorMessage.Text = "please enter numbers greater than 0";
 
 
                 }
@@ -81,6 +81,11 @@ namespace JobsScheduler
             {
                 quantumBlock.Visibility = Visibility.Visible;
                 quantumValue.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                quantumBlock.Visibility = Visibility.Hidden;
+                quantumValue.Visibility = Visibility.Hidden;
             }
         }
     }
