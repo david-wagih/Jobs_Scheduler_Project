@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobsScheduler"
         mc:Ignorable="d"
-        Title="Details" Height="500" Width="1000">
+        Title="Details" Height="800" Width="1100">
     <Grid>
         <DataGrid
             Height="380" 
@@ -22,7 +22,7 @@
         </DataGrid>
         <Button 
                 Click="GetChart_Click"
-                Margin="0,420,0,0"
+                Margin="0,561,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Width="60"
@@ -31,5 +31,10 @@
                 Cursor="Hand"
                 >
             Get Chart</Button>
+        <TextBlock
+            x:Name="warningTextBlock"
+            Visibility="Hidden"
+            Foreground="Red"
+            Margin="632,426,196,34">Please Enter Positive values only</TextBlock>
     </Grid>
 </Window>

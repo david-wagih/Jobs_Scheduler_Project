@@ -54,13 +54,23 @@ namespace JobsScheduler
 
             foreach (var process in ourGrid.Items.OfType<Process>())
             {
-                myProcesses.Add(new Process()
+                if (process.burstTime < 0 || process.arrivalTime < 0 || process.priority < 0 || quantumValue < 0)
                 {
-                    processNumber = process.processNumber,
-                    arrivalTime = process.arrivalTime,
-                    burstTime = process.burstTime,
-                    priority = process.priority,
-                });
+                    warningTextBlock.Visibility = Visibility.Visible;
+                    return;
+                }
+                else
+                {
+                    warningTextBlock.Visibility = Visibility.Hidden;
+                    myProcesses.Add(new Process()
+                    {
+                        processNumber = process.processNumber,
+                        arrivalTime = process.arrivalTime,
+                        burstTime = process.burstTime,
+                        priority = process.priority,
+                    });
+                }
+                    
             }
                 // here myProcesses variable contains the User Input data for each Process and this list should be used in each algo according to Scheduler type
                 if(schedulerType == "FCFS")

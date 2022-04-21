@@ -57,8 +57,17 @@ namespace JobsScheduler
                     noOfProcesses = NumberOfProcesses;
                     schedulerType = Combo_Value.Text;
                     quantumTime = Int32.Parse(quantumValue.Text);
-                    var newForm = new Details(noOfProcesses, schedulerType , quantumTime); //create your new form.
-                    newForm.Show(); //show the new form.
+                    if(quantumTime < 0)
+                    {
+                        errorMessage.Text = "please make sure quantum time is positive number";
+                    }
+                    else
+                    {
+                        errorMessage.Visibility = Visibility.Hidden;
+                        var newForm = new Details(noOfProcesses, schedulerType, quantumTime); //create your new form.
+                        newForm.Show(); //show the new form.
+                    }
+                    
                 }
             }
             catch (Exception ex)
